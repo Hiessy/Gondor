@@ -5,6 +5,7 @@ import org.springframework.hateoas.ResourceSupport;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class TicketResource extends ResourceSupport {
 
@@ -25,14 +26,6 @@ public class TicketResource extends ResourceSupport {
 
     public void setRid(Long rid) {
         this.rid = rid;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getOwner() {
@@ -67,6 +60,14 @@ public class TicketResource extends ResourceSupport {
         this.priority = priority;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -99,8 +100,7 @@ public class TicketResource extends ResourceSupport {
         this.modified = modified;
     }
 
-
     public Ticket toTicket() {
-        return new Ticket(rid, owner, creator, area, priority, title,description, status, created, modified);
+        return new Ticket(rid, owner, creator, area, priority, title, description, status, created, modified);
     }
 }

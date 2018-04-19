@@ -1,11 +1,11 @@
 package ar.com.webapp.ticketing.rest.resources;
 
-import ar.com.webapp.ticketing.domain.service.utils.CommentList;
+import org.springframework.hateoas.ResourceSupport;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class CommentListResource {
+public class CommentListResource extends ResourceSupport {
 
     private List<CommentResource> comments = new ArrayList<CommentResource>();
 

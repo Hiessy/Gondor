@@ -1,5 +1,7 @@
 package ar.com.webapp.ticketing.core.model.entities;
 
+import ar.com.webapp.ticketing.core.validator.model.annotation.AcceptedStringValidation;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -22,6 +24,7 @@ public class User {
     private String password;
     @NotBlank
     @Column
+    @AcceptedStringValidation(acceptedValues={"ADMINISTRATOR","ANALYST","USER"}, message ="Invalid user profile")
     private String profile;
     @NotBlank
     @Column
@@ -31,7 +34,17 @@ public class User {
     private String email;
     @NotBlank
     @Column
+    @AcceptedStringValidation(acceptedValues={"ACTIVE","INACTIVE"}, message ="Invalid user status")
     private String status;
+
+    public User(@NotBlank String userName, @NotBlank @Size(max = 25) String name, @NotBlank String password, @NotBlank String profile, @NotBlank String area, @NotBlank String email) {
+        this.userName = userName;
+        this.name = name;
+        this.password = password;
+        this.profile = profile;
+        this.area = area;
+        this.email = email;
+    }
 
     public User(Long id, @NotBlank String userName, @NotBlank @Size(max = 25) String name, @NotBlank String password, @NotBlank String profile, @NotBlank String area, @NotBlank String email, @NotBlank String status) {
         this.id = id;

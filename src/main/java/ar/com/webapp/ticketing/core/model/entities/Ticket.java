@@ -1,8 +1,14 @@
 package ar.com.webapp.ticketing.core.model.entities;
 
+import ar.com.webapp.ticketing.core.validator.model.annotation.AcceptedStringValidation;
+
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.List;
+
+import java.util.Set;
+
 
 @Entity
 @Table
@@ -10,17 +16,42 @@ public class Ticket {
 
     @Id @GeneratedValue
     private Long id;
+
+    @NotBlank
     private String owner;
+    @NotBlank
     private String creator;
+    @NotBlank
     private String area;
+    @NotBlank
+    @AcceptedStringValidation(acceptedValues={"CRITICAL","HIGH","NORMAL","LOW"}, message ="Invalid ticket priority")
     private String priority;
+    @NotBlank
     private String title;
+    @NotBlank
     private String description;
+    @NotBlank
+    @AcceptedStringValidation(acceptedValues={"OPEN","IN PROGRESS","CLOSED","PENDING"}, message ="Invalid ticket status")
     private String status;
+    @NotNull
     private LocalDateTime created;
+    @NotNull
     private LocalDateTime modified;
 
-    public Ticket(Long id, String owner, String creator, String area, String priority, String title ,String description, String status, LocalDateTime created, LocalDateTime modified) {
+    public Ticket(String owner, String creator, String area, String priority, String title, String description, String status, LocalDateTime created, LocalDateTime modified) {
+        this.owner = owner;
+        this.creator = creator;
+        this.area = area;
+        this.priority = priority;
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.created = created;
+        this.modified = modified;
+    }
+
+    public Ticket(Long id, String owner, String creator, String area, String priority, String title, String description, String status, LocalDateTime created, LocalDateTime modified) {
+
         this.id = id;
         this.owner = owner;
         this.creator = creator;
@@ -33,8 +64,24 @@ public class Ticket {
         this.modified = modified;
     }
 
-    public Ticket() {
 
+    public Ticket() {
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + id +
+                ", owner='" + owner + '\'' +
+                ", creator='" + creator + '\'' +
+                ", area='" + area + '\'' +
+                ", priority='" + priority + '\'' +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", status='" + status + '\'' +
+                ", created=" + created +
+                ", modified=" + modified +
+                '}';
     }
 
     public Long getId() {
@@ -115,22 +162,6 @@ public class Ticket {
 
     public void setModified(LocalDateTime modified) {
         this.modified = modified;
-    }
-
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "id=" + id +
-                ", owner='" + owner + '\'' +
-                ", creator='" + creator + '\'' +
-                ", area='" + area + '\'' +
-                ", priority='" + priority + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
-                ", created=" + created +
-                ", modified=" + modified +
-                '}';
     }
 }
 

@@ -1,31 +1,49 @@
 package ar.com.webapp.ticketing.core.model.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Entity
+@Table
 public class Comment {
 
     @Id @GeneratedValue
     private Long id;
-    private String authorUserName;
+    @NotNull
+    @OneToOne
+    private User user;
+    @NotNull
     private LocalDateTime posted;
+    @NotBlank
     private String text;
-
-    public Comment(Long id, String authorUserName, LocalDateTime posted, String text) {
-        this.id = id;
-        this.authorUserName = authorUserName;
-        this.posted = posted;
-        this.text = text;
-
-    }
-
+    @NotNull
+    @ManyToOne
+    private Ticket ticket;
 
     public Comment() {
+    }
+
+    public Comment(Long id, @NotBlank LocalDateTime posted, @NotBlank String text) {
+        this.id = id;
+        this.posted = posted;
+        this.text = text;
+    }
+
+    public Comment(Long id, @NotBlank User user, @NotBlank LocalDateTime posted, @NotBlank String text) {
+        this.id = id;
+        this.user = user;
+        this.posted = posted;
+        this.text = text;
+    }
+
+    public Comment(Long id, @NotBlank User user, @NotBlank LocalDateTime posted, @NotBlank String text, @NotBlank Ticket ticket) {
+        this.id = id;
+        this.user = user;
+        this.posted = posted;
+        this.text = text;
+        this.ticket = ticket;
     }
 
     public Long getId() {
@@ -36,12 +54,20 @@ public class Comment {
         this.id = id;
     }
 
-    public String getAuthorUserName() {
-        return authorUserName;
+    public User getUser() {
+        return user;
     }
 
-    public void setAuthorUserName(String authorUserName) {
-        this.authorUserName = authorUserName;
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Ticket getTicket() {
+        return ticket;
+    }
+
+    public void setTicket(Ticket ticket) {
+        this.ticket = ticket;
     }
 
     public LocalDateTime getPosted() {
@@ -64,14 +90,13 @@ public class Comment {
     @Override
     public String toString() {
         return "Comment{" +
-                "id='" + id + '\'' +
-                ", authorUserName='" + authorUserName + '\'' +
+                "id=" + id +
+                ", user=" + user +
                 ", posted=" + posted +
                 ", text='" + text + '\'' +
+                ", ticket=" + ticket +
                 '}';
     }
-
-
 }
 
 

@@ -1,6 +1,8 @@
 package ar.com.webapp.ticketing.rest.resources;
 
 import ar.com.webapp.ticketing.core.model.entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.hateoas.ResourceSupport;
 
 public class UserResource extends ResourceSupport {
@@ -38,10 +40,12 @@ public class UserResource extends ResourceSupport {
         this.name = name;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonProperty
     public void setPassword(String password) {
         this.password = password;
     }

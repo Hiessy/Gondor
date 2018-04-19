@@ -1,4 +1,4 @@
-package ar.com.webapp.ticketing.domain.service.utils;
+package ar.com.webapp.ticketing.domain.utils;
 
 import ar.com.webapp.ticketing.core.model.entities.Ticket;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TicketList {
-    List<Ticket> tickets = new ArrayList<Ticket>();
+    List<Ticket> tickets;
 
     public TicketList(List<Ticket> tickets) {
         this.tickets = tickets;

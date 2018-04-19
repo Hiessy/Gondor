@@ -27,7 +27,9 @@ public class UserResourceAsm extends ResourceAssemblerSupport<User, UserResource
         res.setStatus(user.getStatus());
         res.setEmail(user.getEmail());
         res.add(linkTo(methodOn(UserController.class).getUser(user.getUserName())).withSelfRel());
-        res.add(linkTo(methodOn(UserController.class).findAllTickets(user.getUserName())).withRel("tickets"));
+        res.add(linkTo(methodOn(UserController.class).getAllTicketsForUser(user.getUserName())).withRel("tickets"));
+        res.add(linkTo(methodOn(UserController.class).getAllTasksForUser(user.getUserName())).withRel("tasks"));
+        res.add(linkTo(methodOn(UserController.class).getAllCommentsForUser(user.getUserName())).withRel("comments"));
         return res;
     }
 }

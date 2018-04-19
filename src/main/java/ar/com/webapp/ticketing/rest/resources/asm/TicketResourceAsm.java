@@ -1,17 +1,23 @@
 package ar.com.webapp.ticketing.rest.resources.asm;
 
+import ar.com.webapp.ticketing.core.model.entities.Task;
 import ar.com.webapp.ticketing.core.model.entities.Ticket;
-import ar.com.webapp.ticketing.core.model.entities.User;
 import ar.com.webapp.ticketing.rest.controller.TicketController;
 import ar.com.webapp.ticketing.rest.controller.UserController;
+import ar.com.webapp.ticketing.rest.resources.TaskListResource;
+import ar.com.webapp.ticketing.rest.resources.TaskResource;
 import ar.com.webapp.ticketing.rest.resources.TicketResource;
 import org.springframework.hateoas.mvc.ResourceAssemblerSupport;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
 
 public class TicketResourceAsm extends ResourceAssemblerSupport<Ticket, TicketResource> {
 
-    public TicketResourceAsm(){
+    public TicketResourceAsm() {
         super(TicketController.class, TicketResource.class);
     }
 
@@ -29,9 +35,11 @@ public class TicketResourceAsm extends ResourceAssemblerSupport<Ticket, TicketRe
         resource.setModified(ticket.getModified());
         resource.setPriority(ticket.getPriority());
         resource.add(linkTo(TicketController.class).slash(ticket.getId()).withSelfRel());
-        resource.add(linkTo(TicketController.class).slash(ticket.getId()).slash("task").withRel("Task"));
+        resource.add(linkTo(TicketController.class).slash(ticket.getId()).slash("tasks").withRel("Task"));
+        resource.add(linkTo(TicketController.class).slash(ticket.getId()).slash("comments").withRel("Comments"));
         resource.add(linkTo(UserController.class).slash(ticket.getOwner()).withRel("User-Assigned"));
         resource.add(linkTo(UserController.class).slash(ticket.getOwner()).slash("tickets").withRel("User-Tickets"));
         return resource;
     }
+
 }

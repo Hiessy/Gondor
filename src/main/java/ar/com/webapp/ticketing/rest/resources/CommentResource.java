@@ -9,8 +9,8 @@ import java.util.List;
 public class CommentResource extends ResourceSupport {
 
     private Long rid;
-    private String authorUserName;
     private LocalDateTime posted;
+    private String userName;
     private String text;
 
     public Long getRid() {
@@ -19,14 +19,6 @@ public class CommentResource extends ResourceSupport {
 
     public void setRid(Long rid) {
         this.rid = rid;
-    }
-
-    public String getAuthorUserName() {
-        return authorUserName;
-    }
-
-    public void setAuthorUserName(String authorUserName) {
-        this.authorUserName = authorUserName;
     }
 
     public LocalDateTime getPosted() {
@@ -45,8 +37,15 @@ public class CommentResource extends ResourceSupport {
         this.text = text;
     }
 
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 
     public Comment toComment(){
-        return new Comment(rid,authorUserName,posted,text);
+        return new Comment(rid,posted,text);
     }
 }

@@ -32,8 +32,8 @@ public class TicketingDateAnalizerTests {
        // User user = new User("u584110", "Martin","test","User", "ACTIVE");
         //String id, Author author, Date posted, String text
 
-        Comment workTicketComment = new Comment(100110001L, "u584110", modifedDate, "This is a text in a comment");
-        workTicketComments.add(workTicketComment);
+//        Comment workTicketComment = new Comment(100110001L, "u584110", modifedDate, "This is a text in a comment");
+//        workTicketComments.add(workTicketComment);
 
 
       //  workTickets.add(new Ticket(10011L, "Martin", "Juan", "Ambientes", "Alta", "Se solicita limpieza de baños", "IN PROGRESS", createdDate, modifedDate, workTicketComments));

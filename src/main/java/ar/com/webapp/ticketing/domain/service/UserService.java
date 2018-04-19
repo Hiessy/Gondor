@@ -2,17 +2,19 @@ package ar.com.webapp.ticketing.domain.service;
 
 import ar.com.webapp.ticketing.core.model.entities.Ticket;
 import ar.com.webapp.ticketing.core.model.entities.User;
-import ar.com.webapp.ticketing.domain.service.utils.TicketList;
-import ar.com.webapp.ticketing.domain.service.utils.UserList;
+import ar.com.webapp.ticketing.domain.utils.*;
 
 public interface UserService {
 
     User createUser(User user);
-    User findUserByUserName(String userName);
-    User updateUser(String username,User user);
+    User getUserByUserName(String userName);
+    UserList getUsersByName(String name);
+    User updateUser(String userName,User user);
     User deleteUser(String userName);
-    UserList findAllUsers();
-    TicketList getAllTicketsforUser(String UserName);
-    Ticket createTicket(Ticket ticket);
+    UserList getAllUsers();
+    TicketList getAllTicketsForUser(String userName);
+    Ticket createTicket(String userName, Ticket ticket);
 
+    UserTaskList getAllTasksForUser(String userName);
+    UserCommentList getAllCommentsForUser(String userName);
 }

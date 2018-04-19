@@ -1,6 +1,5 @@
 package ar.com.webapp.ticketing.core.repositories.jpa;
 
-import ar.com.webapp.ticketing.core.model.entities.Ticket;
 import ar.com.webapp.ticketing.core.model.entities.User;
 import ar.com.webapp.ticketing.core.repositories.UserRepository;
 import org.springframework.stereotype.Repository;
@@ -12,7 +11,7 @@ import javax.persistence.Query;
 import java.util.List;
 
 @Repository
-public class JpaUserRepository implements UserRepository{
+public class JpaUserRepository implements UserRepository {
 
     @PersistenceContext
     private EntityManager em;
@@ -29,7 +28,7 @@ public class JpaUserRepository implements UserRepository{
         Query query = em.createQuery("SELECT a FROM User a WHERE a.userName=?1");
         query.setParameter(1, userName);
         List<User> users = query.getResultList();
-        if(users.size() == 0) {
+        if (users.size() == 0) {
             return null;
         } else {
             return users.get(0);
@@ -52,6 +51,15 @@ public class JpaUserRepository implements UserRepository{
     public User updateUser(User user) {
         em.merge(user);
         return user;
+    }
+
+    @Override
+    public List<User> findUsersByName(String name) {
+        Query query = em.createQuery("SELECT a FROM User a WHERE a.name=?1");
+        query.setParameter(1, name);
+        List<User> users = query.getResultList();
+
+        return users;
     }
 
 

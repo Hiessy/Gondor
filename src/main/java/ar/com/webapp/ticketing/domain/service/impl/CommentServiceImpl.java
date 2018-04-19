@@ -3,7 +3,7 @@ package ar.com.webapp.ticketing.domain.service.impl;
 import ar.com.webapp.ticketing.core.model.entities.Comment;
 import ar.com.webapp.ticketing.core.repositories.CommentRepository;
 import ar.com.webapp.ticketing.domain.service.CommentService;
-import ar.com.webapp.ticketing.domain.service.utils.CommentList;
+import ar.com.webapp.ticketing.domain.utils.CommentList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,17 +14,22 @@ public class CommentServiceImpl implements CommentService{
     private CommentRepository commentRepository;
 
     @Override
-    public Comment findComment(String commentId) {
+    public Comment findComment(Long commentId) {
+        return commentRepository.findComment(commentId);
+    }
+
+    @Override
+    public Comment modifyComment(Long commentId, Comment data) {
         return null;
     }
 
     @Override
-    public CommentList findCommentReply(String commentId) {
-        return null;
+    public CommentList findAllCommentsWithText(String text) {
+        return new CommentList(commentRepository.findAllCommentsWithText(text),null);
     }
 
     @Override
-    public Comment modifyComment(String commentId, Comment data) {
-        return null;
+    public CommentList findAllComments() {
+        return new CommentList(commentRepository.findAllComments(),null);
     }
 }

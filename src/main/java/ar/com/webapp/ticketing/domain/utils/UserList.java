@@ -1,4 +1,4 @@
-package ar.com.webapp.ticketing.domain.service.utils;
+package ar.com.webapp.ticketing.domain.utils;
 
 import ar.com.webapp.ticketing.core.model.entities.User;
 
